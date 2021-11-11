@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aimii.Test", "Aimii.Test.csproj", "{F634BBC8-6BB1-4B97-976D-E513AB6753E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibrary", "..\DataLibrary\DataLibrary.csproj", "{993EE62A-5225-4AB7-871E-2F4CCE4DE2B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{01F8BC89-6B7A-400E-9C08-C419BEAD711F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F634BBC8-6BB1-4B97-976D-E513AB6753E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F634BBC8-6BB1-4B97-976D-E513AB6753E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F634BBC8-6BB1-4B97-976D-E513AB6753E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F634BBC8-6BB1-4B97-976D-E513AB6753E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{993EE62A-5225-4AB7-871E-2F4CCE4DE2B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993EE62A-5225-4AB7-871E-2F4CCE4DE2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993EE62A-5225-4AB7-871E-2F4CCE4DE2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993EE62A-5225-4AB7-871E-2F4CCE4DE2B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01F8BC89-6B7A-400E-9C08-C419BEAD711F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01F8BC89-6B7A-400E-9C08-C419BEAD711F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01F8BC89-6B7A-400E-9C08-C419BEAD711F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01F8BC89-6B7A-400E-9C08-C419BEAD711F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98E3A235-D326-4D02-8D82-7F21B3557D4A}
+	EndGlobalSection
+EndGlobal
