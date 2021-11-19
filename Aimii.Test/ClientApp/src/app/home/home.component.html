@@ -1,26 +1,30 @@
-<h1 id="tableLabel">Get user</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
 <p *ngIf="!users"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="users">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Job Title</th>
-      <th>Email</th>
-      <th>Phone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.firstName }}</td>
-      <td>{{ user.lastName }}</td>
-      <td>{{ user.jobTitle }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.phone }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="main">
+  <div class="spacer"></div>
+  <div class="user_search round_corners border_white background_white">
+    <div class="user_search_box">
+      <input type="text" class="search_input" placeholder="Search for a user..." name="search" (input)="onUserInput($event)" [value]="search" />
+      <button name="searchButton" class="search_button">Go!</button>
+    </div>
+  </div>
+  <div class="user_search_result" *ngIf="showResults">
+    <div *ngFor="let f of filter">
+      <div (click)="onClickResult(f)">{{ f.firstName }} {{ f.lastName }}</div>
+    </div>
+  </div>
+  <div class="place_holder_list">
+    <div *ngFor="let user of selectedUsers" class="round_corners place_holder border_white float_left">
+      <div><strong>{{ user.firstName }} {{ user.lastName }}</strong></div>
+      <div>{{ user.jobTitle }}</div>
+      <div>{{ user.email }}</div>
+      <div>{{ user.phone }}</div>
+    </div>
+  </div>
+  
+  <div>
+    <app-user-form [currentUsers]="users" (updateUserList)="updateUserList(users)">Loading...</app-user-form>
+  </div>
+</div>
+
+
