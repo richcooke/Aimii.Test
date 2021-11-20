@@ -58,7 +58,7 @@ export class UserFormComponent implements OnInit {
       this.currentUsers = result;
 
       this.showCreateNewUser = false;
-      ////this.updateUserList.emit(this.currentUsers);
+      this.updateUserList.emit(this.currentUsers);
       this.showMessageSuccess();
 
       this.userForm.get("userFirstName").setValue('');
