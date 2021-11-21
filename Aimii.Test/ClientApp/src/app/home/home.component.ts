@@ -50,17 +50,21 @@ export class HomeComponent {
     this.selectedUsers.push(user);
     this.search = '';
     this.showResults = false;
+    this.getUsers();
   }
 
   getUsers() {
     this.http.get<User[]>(this.baseUrl + 'home').subscribe(result => {
       this.users = result;
+      //Filter this.users with selectedUsers list to reset
+      if (this.selectedUsers.length > 0) {
+        this.users = filterObjectArray(this.users, this.selectedUsers);
+        ////this.selectedUsers.forEach(item => {
+        ////  this.users = this.users.filter(x => x !== item);
+        ////  }
+        ////);
+      }
     }, error => console.error(error));
-    //Filter this.users with selectedUsers list to reset
-    if (this.selectedUsers.length > 0) {
-      var filter = filterObjectArray(this.users, this.selectedUsers);
-      this.users = filter;
-    }
   }
 
   updateUserList(users) {
@@ -70,9 +74,13 @@ export class HomeComponent {
 
 const filterObjectArray = (arr, filterArr) => (
   arr.filter(el =>
-    filterArr.some(f =>
+    !filterArr.some(f =>
       ////f !== el
-      f.firstName !== el.firstName && f.lastName !== el.lastName && f.jobTitle !== el.jobTitle && f.phone !== el.phone && f.email !== el.email
+      f.firstName === el.firstName &&
+      f.lastName === el.lastName &&
+      f.jobTitle === el.jobTitle &&
+      f.phone === el.phone &&
+      f.email === el.email
     )
   )
 );

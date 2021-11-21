@@ -51,17 +51,21 @@ var HomeComponent = /** @class */ (function () {
         this.selectedUsers.push(user);
         this.search = '';
         this.showResults = false;
+        this.getUsers();
     };
     HomeComponent.prototype.getUsers = function () {
         var _this = this;
         this.http.get(this.baseUrl + 'home').subscribe(function (result) {
             _this.users = result;
+            //Filter this.users with selectedUsers list to reset
+            if (_this.selectedUsers.length > 0) {
+                _this.users = filterObjectArray(_this.users, _this.selectedUsers);
+                ////this.selectedUsers.forEach(item => {
+                ////  this.users = this.users.filter(x => x !== item);
+                ////  }
+                ////);
+            }
         }, function (error) { return console.error(error); });
-        //Filter this.users with selectedUsers list to reset
-        if (this.selectedUsers.length > 0) {
-            var filter = filterObjectArray(this.users, this.selectedUsers);
-            this.users = filter;
-        }
     };
     HomeComponent.prototype.updateUserList = function (users) {
         this.users = users;
@@ -78,9 +82,13 @@ var HomeComponent = /** @class */ (function () {
 }());
 exports.HomeComponent = HomeComponent;
 var filterObjectArray = function (arr, filterArr) { return (arr.filter(function (el) {
-    return filterArr.some(function (f) {
+    return !filterArr.some(function (f) {
         ////f !== el
-        return f.firstName !== el.firstName && f.lastName !== el.lastName && f.jobTitle !== el.jobTitle && f.phone !== el.phone && f.email !== el.email;
+        return f.firstName === el.firstName &&
+            f.lastName === el.lastName &&
+            f.jobTitle === el.jobTitle &&
+            f.phone === el.phone &&
+            f.email === el.email;
     });
 })); };
 var filterByValue = function (arr, query) {
