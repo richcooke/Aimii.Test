@@ -96,11 +96,11 @@ export class UserFormComponent implements OnInit {
     console.log('userEmail:' + this.userForm.get("userEmail").value);
     console.log('userPhone:' + this.userForm.get("userPhone").value);
     
-    this.user.firstName = this.userForm.get("userFirstName").value;
-    this.user.lastName = this.userForm.get("userLastName").value;
-    this.user.jobTitle = this.userForm.get("userJobTitle").value;
-    this.user.email = this.userForm.get("userEmail").value;
-    this.user.phone = this.userForm.get("userPhone").value;
+    this.user.firstName = this.userForm.get("userFirstName").value.trim();
+    this.user.lastName = this.userForm.get("userLastName").value.trim();
+    this.user.jobTitle = this.userForm.get("userJobTitle").value.trim();
+    this.user.email = this.userForm.get("userEmail").value.trim();
+    this.user.phone = this.userForm.get("userPhone").value.trim();
 
     if (this.validateUserForm()) {
     //Post user object to UserFormController/Create

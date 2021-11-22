@@ -15,12 +15,12 @@ export class HomeComponent {
   http: HttpClient;
   baseUrl: string;
 
-  search = '';
-  output = '';
+  search: string = '';
+  output: string = '';
   showResults: boolean = false;
-  filter = [];
-  json = '';
-  selected = '';
+  filter: User[] = [];
+  json: string = '';
+  selected: string = '';
 
   constructor(
     http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
@@ -33,9 +33,9 @@ export class HomeComponent {
   }
   
   onUserInput(event) {
+    this.users = this.getUsers();
     this.search = event.target.value;
     if (this.search.length >= 2) {
-      this.users = this.getUsers();
       this.filter = filterByValue(this.users, this.search);
       this.showResults = false;
       if (this.filter.length > 0) {
@@ -51,7 +51,6 @@ export class HomeComponent {
     this.selectedUsers.push(user);
     this.search = '';
     this.showResults = false;
-    this.users = this.getUsers();
   }
 
   getUsers() {

@@ -13,14 +13,10 @@ namespace Aimii.Test.Controllers
     [Route("[controller]")]
     public class UserFormController : ControllerBase
     {
-        private readonly IAppSettings _appSettings;
-        private readonly IUser _user;
         private readonly IExcelService _excelService;
 
-        public UserFormController(IAppSettings appSettings, IUser user, IExcelService excelService)
+        public UserFormController(IExcelService excelService)
         {
-            _appSettings = appSettings;
-            _user = user;
             _excelService = excelService;
         }
 

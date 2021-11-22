@@ -10,14 +10,10 @@ namespace Aimii.Test.Controllers
     [Route("[controller]")]
     public class HomeController : ControllerBase
     {
-        private readonly IAppSettings _appSettings;
-        private readonly IUser _user;
         private readonly IExcelService _excelService;
         
-        public HomeController(IAppSettings appSettings, IUser user, IExcelService excelService)
+        public HomeController(IExcelService excelService)
         {
-            _appSettings = appSettings;
-            _user = user;
             _excelService = excelService;
         }
 

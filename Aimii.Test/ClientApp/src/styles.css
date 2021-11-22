@@ -145,6 +145,13 @@ white {
   float: left;
 }
 
+.truncate {
+  width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .create_user_form_position {
   position: fixed;
   width: 850px;
@@ -164,7 +171,7 @@ white {
   border: solid 1px #e6235c;
   border-radius: 30px;
   overflow: hidden;
-  margin: 0;
+  margin: 25px;
   position: relative;
 
 }

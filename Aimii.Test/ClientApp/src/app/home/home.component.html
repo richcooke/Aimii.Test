@@ -15,10 +15,10 @@
   </div>
   <div class="place_holder_list">
     <div *ngFor="let user of selectedUsers" class="round_corners place_holder border_white float_left">
-      <div><strong>{{ user.firstName }} {{ user.lastName }}</strong></div>
-      <div>{{ user.jobTitle }}</div>
-      <div>{{ user.phone }}</div>
-      <div>{{ user.email }}</div>
+      <div class="truncate"><strong>{{ user.firstName }} {{ user.lastName }}</strong></div>
+      <div class="truncate">{{ user.jobTitle }}</div>
+      <div class="truncate">{{ user.phone }}</div>
+      <div class="truncate">{{ user.email }}</div>
     </div>
   </div>
   

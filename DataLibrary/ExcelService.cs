@@ -18,21 +18,17 @@ namespace DataLibrary
         public List<User> Users = new List<User>();
 
         //Inject dependencies
-        IAppSettings _appSettings;
-        IUser _user;
+        private readonly IAppSettings _appSettings;
         
-        public ExcelService(IAppSettings appSettings, IUser user)
+        public ExcelService(IAppSettings appSettings)
         {
             _appSettings = appSettings;
-            _user = user;
             this.FilePath = _appSettings.Path;
             this.WorkSheetName = _appSettings.WorkSheetName;
         }
 
         public List<User> GetUsers()
         {
-            ////var data = from a in ExcelFile.Worksheet<User>(this.WorkSheetName) select a;
-            ////this.Users = new List<User>(data) { user };
             var data = ReadFromExcel<List<User>>(this.FilePath);
             this.Users = new List<User>(data);
             return this.Users;

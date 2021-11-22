@@ -33,9 +33,9 @@ var HomeComponent = /** @class */ (function () {
         this.users = this.getUsers();
     };
     HomeComponent.prototype.onUserInput = function (event) {
+        this.users = this.getUsers();
         this.search = event.target.value;
         if (this.search.length >= 2) {
-            this.users = this.getUsers();
             this.filter = filterByValue(this.users, this.search);
             this.showResults = false;
             if (this.filter.length > 0) {
@@ -51,7 +51,6 @@ var HomeComponent = /** @class */ (function () {
         this.selectedUsers.push(user);
         this.search = '';
         this.showResults = false;
-        this.users = this.getUsers();
     };
     HomeComponent.prototype.getUsers = function () {
         var _this = this;
