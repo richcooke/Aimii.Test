@@ -54,7 +54,7 @@ export class UserFormComponent implements OnInit {
       return false;
     }
 
-    if (!this.validatePhone(this.user.phone)) {
+    if (!this.validatePhone(this.user.phone.replace(/ /g, ""))) {
       this.showErrorMessageBox("ERROR: Phone number must be valid");
       return false;
     }
