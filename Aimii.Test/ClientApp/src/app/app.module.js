@@ -13,10 +13,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/common/http");
 var router_1 = require("@angular/router");
 var app_component_1 = require("./app.component");
-var nav_menu_component_1 = require("./nav-menu/nav-menu.component");
 var home_component_1 = require("./home/home.component");
-var counter_component_1 = require("./counter/counter.component");
-var fetch_data_component_1 = require("./fetch-data/fetch-data.component");
 var user_form_component_1 = require("./user-form/user-form.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -25,10 +22,7 @@ var AppModule = /** @class */ (function () {
         (0, core_1.NgModule)({
             declarations: [
                 app_component_1.AppComponent,
-                nav_menu_component_1.NavMenuComponent,
                 home_component_1.HomeComponent,
-                counter_component_1.CounterComponent,
-                fetch_data_component_1.FetchDataComponent,
                 user_form_component_1.UserFormComponent
             ],
             imports: [
@@ -38,8 +32,6 @@ var AppModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 router_1.RouterModule.forRoot([
                     { path: '', component: home_component_1.HomeComponent, pathMatch: 'full' },
-                    { path: 'counter', component: counter_component_1.CounterComponent },
-                    { path: 'fetch-data', component: fetch_data_component_1.FetchDataComponent },
                 ])
             ],
             providers: [],

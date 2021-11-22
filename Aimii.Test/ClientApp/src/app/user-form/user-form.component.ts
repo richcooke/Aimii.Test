@@ -30,11 +30,11 @@ export class UserFormComponent implements OnInit {
   showErrorMessage: boolean = false;
 
   userForm = new FormGroup({
-    userFirstName: new FormControl("", Validators.required),
-    userLastName: new FormControl("", Validators.required),
-    userJobTitle: new FormControl("", Validators.required),
-    userEmail: new FormControl("", Validators.required),
-    userPhone: new FormControl("", Validators.required)
+    userFirstName: new FormControl(""),
+    userLastName: new FormControl(""),
+    userJobTitle: new FormControl(""),
+    userEmail: new FormControl(""),
+    userPhone: new FormControl("")
   });
 
   ngOnInit() {

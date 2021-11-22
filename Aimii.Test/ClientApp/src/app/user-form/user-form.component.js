@@ -25,11 +25,11 @@ var UserFormComponent = /** @class */ (function () {
         this.showNewUserAdded = false;
         this.showErrorMessage = false;
         this.userForm = new forms_1.FormGroup({
-            userFirstName: new forms_1.FormControl("", forms_1.Validators.required),
-            userLastName: new forms_1.FormControl("", forms_1.Validators.required),
-            userJobTitle: new forms_1.FormControl("", forms_1.Validators.required),
-            userEmail: new forms_1.FormControl("", forms_1.Validators.required),
-            userPhone: new forms_1.FormControl("", forms_1.Validators.required)
+            userFirstName: new forms_1.FormControl(""),
+            userLastName: new forms_1.FormControl(""),
+            userJobTitle: new forms_1.FormControl(""),
+            userEmail: new forms_1.FormControl(""),
+            userPhone: new forms_1.FormControl("")
         });
         this.http = http;
         this.baseUrl = baseUrl;
