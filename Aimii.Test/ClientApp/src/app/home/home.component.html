@@ -1,4 +1,4 @@
-<p *ngIf="!users"><em>Loading 1...</em></p>
+<p *ngIf="!users"><em>Loading...</em></p>
 
 <div class="main">
   <div class="spacer"></div>
@@ -23,6 +23,6 @@
   </div>
   
   <div>
-    <app-user-form [currentUsers]="users" (updateUserList)="updateUserList(users)">Loading 2...</app-user-form>
+    <app-user-form [currentUsers]="users" [allUsers]="allUsers" (updateUserList)="updateUserList(users)">Loading...</app-user-form>
   </div>
 </div>

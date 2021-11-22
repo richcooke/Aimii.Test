@@ -30,12 +30,12 @@ var HomeComponent = /** @class */ (function () {
         this.baseUrl = baseUrl;
     }
     HomeComponent.prototype.ngOnInit = function () {
-        this.getUsers();
+        this.users = this.getUsers();
     };
     HomeComponent.prototype.onUserInput = function (event) {
         this.search = event.target.value;
         if (this.search.length >= 2) {
-            this.getUsers();
+            this.users = this.getUsers();
             this.filter = filterByValue(this.users, this.search);
             this.showResults = false;
             if (this.filter.length > 0) {
@@ -51,24 +51,23 @@ var HomeComponent = /** @class */ (function () {
         this.selectedUsers.push(user);
         this.search = '';
         this.showResults = false;
-        this.getUsers();
+        this.users = this.getUsers();
     };
     HomeComponent.prototype.getUsers = function () {
         var _this = this;
         this.http.get(this.baseUrl + 'home').subscribe(function (result) {
+            _this.allUsers = result;
             _this.users = result;
             //Filter this.users with selectedUsers list to reset
-            if (_this.selectedUsers.length > 0) {
-                _this.users = filterObjectArray(_this.users, _this.selectedUsers);
-                ////this.selectedUsers.forEach(item => {
-                ////  this.users = this.users.filter(x => x !== item);
-                ////  }
-                ////);
-            }
+            _this.users = _this.updateUserList();
         }, function (error) { return console.error(error); });
+        return this.users;
     };
-    HomeComponent.prototype.updateUserList = function (users) {
-        this.users = users;
+    HomeComponent.prototype.updateUserList = function () {
+        if (this.selectedUsers.length > 0) {
+            this.users = filterOutObjectArray(this.users, this.selectedUsers);
+        }
+        return this.users;
     };
     HomeComponent = __decorate([
         (0, core_1.Component)({
@@ -81,9 +80,8 @@ var HomeComponent = /** @class */ (function () {
     return HomeComponent;
 }());
 exports.HomeComponent = HomeComponent;
-var filterObjectArray = function (arr, filterArr) { return (arr.filter(function (el) {
+var filterOutObjectArray = function (arr, filterArr) { return (arr.filter(function (el) {
     return !filterArr.some(function (f) {
-        ////f !== el
         return f.firstName === el.firstName &&
             f.lastName === el.lastName &&
             f.jobTitle === el.jobTitle &&

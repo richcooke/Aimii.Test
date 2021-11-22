@@ -8,6 +8,7 @@ import { User } from '../User';
 })
 export class HomeComponent {
   public users: User[];
+  public allUsers: User[];
   newUsers: User[];
   public selectedUsers: User[] = [];
   public user = new User();
@@ -28,13 +29,13 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    this.getUsers();
+    this.users = this.getUsers();
   }
   
   onUserInput(event) {
     this.search = event.target.value;
     if (this.search.length >= 2) {
-      this.getUsers();
+      this.users = this.getUsers();
       this.filter = filterByValue(this.users, this.search);
       this.showResults = false;
       if (this.filter.length > 0) {
@@ -50,32 +51,30 @@ export class HomeComponent {
     this.selectedUsers.push(user);
     this.search = '';
     this.showResults = false;
-    this.getUsers();
+    this.users = this.getUsers();
   }
 
   getUsers() {
     this.http.get<User[]>(this.baseUrl + 'home').subscribe(result => {
+      this.allUsers = result;
       this.users = result;
       //Filter this.users with selectedUsers list to reset
-      if (this.selectedUsers.length > 0) {
-        this.users = filterObjectArray(this.users, this.selectedUsers);
-        ////this.selectedUsers.forEach(item => {
-        ////  this.users = this.users.filter(x => x !== item);
-        ////  }
-        ////);
-      }
+      this.users = this.updateUserList();
     }, error => console.error(error));
+    return this.users;
   }
 
-  updateUserList(users) {
-    this.users = users;
+  updateUserList() {
+    if (this.selectedUsers.length > 0) {
+      this.users = filterOutObjectArray(this.users, this.selectedUsers);
+    }
+    return this.users;
   }
 }
 
-const filterObjectArray = (arr, filterArr) => (
+const filterOutObjectArray = (arr, filterArr) => (
   arr.filter(el =>
     !filterArr.some(f =>
-      ////f !== el
       f.firstName === el.firstName &&
       f.lastName === el.lastName &&
       f.jobTitle === el.jobTitle &&

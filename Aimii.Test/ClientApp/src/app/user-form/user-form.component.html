@@ -2,6 +2,7 @@
 <div class="create_user_form_position">
   <div class="create_user_form" *ngIf="showCreateNewUser">
     <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+      
       <div class="create_user_form_row">
         <input type="text" formControlName="userFirstName" placeholder="First name" class="float_left long_input_box" />
         <input type="text" formControlName="userLastName" placeholder="Last name" class="float_right long_input_box" />
@@ -18,4 +19,5 @@
   <div class="new_user_form_row"></div>
   <div class="new_user_form_row"><button name="newUserButton" class="round_corners" (click)="toggleCreateNewUser()">New User +</button></div>
 </div>
+<div><button name="errorMessage" *ngIf="showErrorMessage" class="new_user_added_message round_corners">{{errorMessage}}</button></div>
 <div><button name="newUserAddedMessage" *ngIf="showNewUserAdded" class="new_user_added_message round_corners">New user added! <span class="large_x">X</span></button></div>

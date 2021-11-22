@@ -23,6 +23,7 @@ var UserFormComponent = /** @class */ (function () {
         this.user = new User_1.User();
         this.showCreateNewUser = false;
         this.showNewUserAdded = false;
+        this.showErrorMessage = false;
         this.userForm = new forms_1.FormGroup({
             userFirstName: new forms_1.FormControl("", forms_1.Validators.required),
             userLastName: new forms_1.FormControl("", forms_1.Validators.required),
@@ -38,6 +39,43 @@ var UserFormComponent = /** @class */ (function () {
     UserFormComponent.prototype.toggleCreateNewUser = function () {
         this.showCreateNewUser = !this.showCreateNewUser;
     };
+    UserFormComponent.prototype.validateUserForm = function () {
+        var _this = this;
+        if (this.user.firstName.length === 0 ||
+            this.user.lastName.length === 0 ||
+            this.user.jobTitle.length === 0 ||
+            this.user.phone.length === 0 ||
+            this.user.email.length === 0) {
+            this.showErrorMessageBox("ERROR: All fields must have a value");
+            return false;
+        }
+        if (!this.validatePhone(this.user.phone)) {
+            this.showErrorMessageBox("ERROR: Phone number must be valid");
+            return false;
+        }
+        if (!this.validateEmail(this.user.email)) {
+            this.showErrorMessageBox("ERROR: Email address must be valid");
+            return false;
+        }
+        var duplicate = this.allUsers.filter(function (f) { return f.firstName === _this.user.firstName &&
+            f.lastName === _this.user.lastName &&
+            f.jobTitle === _this.user.jobTitle &&
+            f.phone === _this.user.phone &&
+            f.email === _this.user.email; });
+        if (duplicate.length > 0) {
+            this.showErrorMessageBox("ERROR: New user is a duplicate record");
+            return false;
+        }
+        return true;
+    };
+    UserFormComponent.prototype.validatePhone = function (phone) {
+        var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        return re.test(String(phone).toLowerCase());
+    };
+    UserFormComponent.prototype.validateEmail = function (email) {
+        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    };
     UserFormComponent.prototype.onFormSubmit = function () {
         var _this = this;
         console.log('userFirstName:' + this.userForm.get("userFirstName").value);
@@ -50,18 +88,20 @@ var UserFormComponent = /** @class */ (function () {
         this.user.jobTitle = this.userForm.get("userJobTitle").value;
         this.user.email = this.userForm.get("userEmail").value;
         this.user.phone = this.userForm.get("userPhone").value;
-        //Post user object to UserFormController/Create
-        this.http.post(this.baseUrl + 'userform', this.user).subscribe(function (result) {
-            _this.currentUsers = result;
-            _this.showCreateNewUser = false;
-            _this.updateUserList.emit(_this.currentUsers);
-            _this.showMessageSuccess();
-            _this.userForm.get("userFirstName").setValue('');
-            _this.userForm.get("userLastName").setValue('');
-            _this.userForm.get("userJobTitle").setValue('');
-            _this.userForm.get("userEmail").setValue('');
-            _this.userForm.get("userPhone").setValue('');
-        }, function (error) { return console.error(error); });
+        if (this.validateUserForm()) {
+            //Post user object to UserFormController/Create
+            this.http.post(this.baseUrl + 'userform', this.user).subscribe(function (result) {
+                _this.currentUsers = result;
+                _this.showCreateNewUser = false;
+                _this.updateUserList.emit();
+                _this.showMessageSuccess();
+                _this.userForm.get("userFirstName").setValue('');
+                _this.userForm.get("userLastName").setValue('');
+                _this.userForm.get("userJobTitle").setValue('');
+                _this.userForm.get("userEmail").setValue('');
+                _this.userForm.get("userPhone").setValue('');
+            }, function (error) { return console.error(error); });
+        }
     };
     UserFormComponent.prototype.showMessageSuccess = function () {
         var _this = this;
@@ -70,10 +110,22 @@ var UserFormComponent = /** @class */ (function () {
             _this.showNewUserAdded = false;
         }, 3000);
     };
+    UserFormComponent.prototype.showErrorMessageBox = function (errorMessage) {
+        var _this = this;
+        this.errorMessage = errorMessage;
+        this.showErrorMessage = true;
+        setTimeout(function () {
+            _this.showErrorMessage = false;
+        }, 3000);
+    };
     __decorate([
         (0, core_1.Input)(),
         __metadata("design:type", Object)
     ], UserFormComponent.prototype, "currentUsers", void 0);
+    __decorate([
+        (0, core_1.Input)(),
+        __metadata("design:type", Object)
+    ], UserFormComponent.prototype, "allUsers", void 0);
     __decorate([
         (0, core_1.Output)(),
         __metadata("design:type", Object)
